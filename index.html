@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>宝宝拍拍乐</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="game-shell">
+      <section class="hero" aria-labelledby="game-title">
+        <p class="eyebrow">1 岁半宝宝小游戏</p>
+        <h1 id="game-title">宝宝拍拍乐</h1>
+        <p class="intro">拍拍小动物，看看谁会出来打招呼。建议家长陪同，一次玩 3-5 分钟。</p>
+      </section>
+
+      <section class="play-card" aria-live="polite">
+        <div class="sky" aria-hidden="true">
+          <span class="cloud cloud-one"></span>
+          <span class="cloud cloud-two"></span>
+          <span class="sun"></span>
+        </div>
+
+        <button class="animal-button" id="animalButton" type="button" aria-label="拍拍小动物">
+          <span class="animal-face" id="animalFace">🐥</span>
+        </button>
+
+        <p class="message" id="message">拍拍我</p>
+
+        <div class="choices" aria-label="选择小动物">
+          <button class="choice is-active" type="button" data-animal="chick" aria-label="小鸡">🐥</button>
+          <button class="choice" type="button" data-animal="bunny" aria-label="小兔">🐰</button>
+          <button class="choice" type="button" data-animal="bear" aria-label="小熊">🐻</button>
+          <button class="choice" type="button" data-animal="cat" aria-label="小猫">🐱</button>
+        </div>
+      </section>
+
+      <section class="parent-note">
+        <h2>给家长的小提示</h2>
+        <p>可以一边点一边说：“这是小鸡，黄黄的，小鸡说你好。”帮助宝宝认识颜色、动物和因果关系。</p>
+      </section>
+    </main>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
