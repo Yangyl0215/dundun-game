@@ -2,43 +2,77 @@
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#ffd88a" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="宝宝拍拍乐" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <title>宝宝拍拍乐</title>
+    <link rel="manifest" href="./manifest.json" />
+    <link rel="apple-touch-icon" href="./icon.svg" />
+    <link rel="icon" href="./icon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <main class="game-shell">
-      <section class="hero" aria-labelledby="game-title">
-        <p class="eyebrow">1 岁半宝宝小游戏</p>
-        <h1 id="game-title">宝宝拍拍乐</h1>
-        <p class="intro">拍拍小动物，看看谁会出来打招呼。建议家长陪同，一次玩 3-5 分钟。</p>
-      </section>
+    <main class="app-shell">
+      <header class="app-bar">
+        <div>
+          <p class="eyebrow">宝宝专属小 App</p>
+          <h1 id="game-title">宝宝拍拍乐</h1>
+        </div>
+        <button class="parent-chip" id="parentTipButton" type="button" aria-label="查看家长提示">
+          家长提示
+        </button>
+      </header>
 
-      <section class="play-card" aria-live="polite">
+      <section class="stage-card" aria-labelledby="game-title" aria-live="polite">
         <div class="sky" aria-hidden="true">
           <span class="cloud cloud-one"></span>
           <span class="cloud cloud-two"></span>
           <span class="sun"></span>
+          <span class="hill hill-one"></span>
+          <span class="hill hill-two"></span>
         </div>
 
+        <p class="prompt" id="prompt">点一点，听听谁在打招呼</p>
+
         <button class="animal-button" id="animalButton" type="button" aria-label="拍拍小动物">
+          <span class="animal-glow" aria-hidden="true"></span>
           <span class="animal-face" id="animalFace">🐥</span>
         </button>
 
         <p class="message" id="message">拍拍我</p>
 
-        <div class="choices" aria-label="选择小动物">
-          <button class="choice is-active" type="button" data-animal="chick" aria-label="小鸡">🐥</button>
-          <button class="choice" type="button" data-animal="bunny" aria-label="小兔">🐰</button>
-          <button class="choice" type="button" data-animal="bear" aria-label="小熊">🐻</button>
-          <button class="choice" type="button" data-animal="cat" aria-label="小猫">🐱</button>
-        </div>
+        <div class="soft-home-indicator" aria-hidden="true"></div>
       </section>
 
-      <section class="parent-note">
-        <h2>给家长的小提示</h2>
-        <p>可以一边点一边说：“这是小鸡，黄黄的，小鸡说你好。”帮助宝宝认识颜色、动物和因果关系。</p>
-      </section>
+      <nav class="animal-dock" aria-label="选择小动物">
+        <button class="choice is-active" type="button" data-animal="chick" aria-label="小鸡">
+          <span class="choice-icon">🐥</span>
+          <span class="choice-name">小鸡</span>
+        </button>
+        <button class="choice" type="button" data-animal="bunny" aria-label="小兔">
+          <span class="choice-icon">🐰</span>
+          <span class="choice-name">小兔</span>
+        </button>
+        <button class="choice" type="button" data-animal="bear" aria-label="小熊">
+          <span class="choice-icon">🐻</span>
+          <span class="choice-name">小熊</span>
+        </button>
+        <button class="choice" type="button" data-animal="cat" aria-label="小猫">
+          <span class="choice-icon">🐱</span>
+          <span class="choice-name">小猫</span>
+        </button>
+      </nav>
+
+      <aside class="parent-sheet" id="parentSheet" hidden>
+        <div class="sheet-card">
+          <button class="sheet-close" id="sheetClose" type="button" aria-label="关闭提示">×</button>
+          <h2>给家长的小提示</h2>
+          <p>建议家长陪同，一次玩 3-5 分钟。可以边点边说：“这是小鸡，黄黄的，小鸡说你好。”</p>
+          <p>这个小游戏没有失败、计时和广告，重点是让宝宝练习点按、认识动物和建立因果关系。</p>
+        </div>
+      </aside>
     </main>
 
     <script src="./script.js"></script>

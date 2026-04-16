@@ -1,0 +1,18 @@
+{
+  "name": "宝宝拍拍乐",
+  "short_name": "拍拍乐",
+  "description": "适合 1 岁半宝宝在家长陪同下玩的轻互动小游戏。",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#ffdca0",
+  "theme_color": "#ffd88a",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

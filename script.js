@@ -2,24 +2,28 @@ const animals = {
   chick: {
     face: "🐥",
     messages: ["小鸡你好", "叽叽叽", "黄黄的小鸡"],
+    prompts: ["找一找小鸡", "拍拍小鸡", "小鸡在哪里呀"],
     colors: ["#ffe58f", "#ffc98b"],
     tone: 660,
   },
   bunny: {
     face: "🐰",
     messages: ["小兔跳跳", "耳朵长长", "白白的小兔"],
+    prompts: ["小兔想跳跳", "拍拍小兔", "长耳朵在哪里"],
     colors: ["#ffd7e8", "#f8aeca"],
     tone: 760,
   },
   bear: {
     face: "🐻",
     messages: ["小熊抱抱", "软软的小熊", "你好呀"],
+    prompts: ["小熊来抱抱", "拍拍小熊", "小熊醒醒啦"],
     colors: ["#d9a36a", "#bd7f45"],
     tone: 520,
   },
   cat: {
     face: "🐱",
     messages: ["小猫喵喵", "摸摸胡子", "橘色小猫"],
+    prompts: ["小猫在这里", "拍拍小猫", "小猫说喵喵"],
     colors: ["#ffc36b", "#ff9d55"],
     tone: 700,
   },
@@ -28,7 +32,11 @@ const animals = {
 const animalButton = document.querySelector("#animalButton");
 const animalFace = document.querySelector("#animalFace");
 const message = document.querySelector("#message");
+const prompt = document.querySelector("#prompt");
 const choices = document.querySelectorAll(".choice");
+const parentTipButton = document.querySelector("#parentTipButton");
+const parentSheet = document.querySelector("#parentSheet");
+const sheetClose = document.querySelector("#sheetClose");
 
 let currentAnimal = "chick";
 let audioContext;
@@ -40,8 +48,9 @@ function setAnimal(animalName) {
   messageIndex = 0;
   animalFace.textContent = animal.face;
   message.textContent = "拍拍我";
+  prompt.textContent = animal.prompts[0];
   animalButton.style.background = `
-    radial-gradient(circle at 36% 30%, rgba(255, 255, 255, 0.78), transparent 28%),
+    radial-gradient(circle at 36% 28%, rgba(255, 255, 255, 0.82), transparent 27%),
     linear-gradient(145deg, ${animal.colors[0]}, ${animal.colors[1]})
   `;
 
@@ -68,7 +77,7 @@ function playSoftTone(frequency) {
   oscillator.frequency.exponentialRampToValueAtTime(frequency * 1.22, now + 0.16);
 
   gain.gain.setValueAtTime(0.0001, now);
-  gain.gain.exponentialRampToValueAtTime(0.12, now + 0.025);
+  gain.gain.exponentialRampToValueAtTime(0.1, now + 0.025);
   gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.22);
 
   oscillator.connect(gain);
@@ -80,10 +89,10 @@ function playSoftTone(frequency) {
 function showConfetti(x, y) {
   const colors = ["#ff8c72", "#ffd45c", "#7cc88a", "#79c7d7"];
 
-  for (let i = 0; i < 9; i += 1) {
+  for (let i = 0; i < 10; i += 1) {
     const dot = document.createElement("span");
-    const angle = (Math.PI * 2 * i) / 9;
-    const distance = 70 + Math.random() * 30;
+    const angle = (Math.PI * 2 * i) / 10;
+    const distance = 76 + Math.random() * 34;
 
     dot.className = "confetti";
     dot.style.setProperty("--x", `${x}px`);
@@ -104,6 +113,7 @@ function celebrate(event) {
   const y = event.clientY || rect.top + rect.height / 2;
 
   message.textContent = animal.messages[messageIndex % animal.messages.length];
+  prompt.textContent = animal.prompts[messageIndex % animal.prompts.length];
   messageIndex += 1;
 
   animalButton.classList.add("is-bouncing");
@@ -113,7 +123,22 @@ function celebrate(event) {
   showConfetti(x, y);
 }
 
+function openParentSheet() {
+  parentSheet.hidden = false;
+}
+
+function closeParentSheet() {
+  parentSheet.hidden = true;
+}
+
 animalButton.addEventListener("click", celebrate);
+parentTipButton.addEventListener("click", openParentSheet);
+sheetClose.addEventListener("click", closeParentSheet);
+parentSheet.addEventListener("click", (event) => {
+  if (event.target === parentSheet) {
+    closeParentSheet();
+  }
+});
 
 choices.forEach((choice) => {
   choice.addEventListener("click", () => {
